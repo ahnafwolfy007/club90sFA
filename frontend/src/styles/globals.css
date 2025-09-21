@@ -1,0 +1,424 @@
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+
+/* ==================================================
+   GOOGLE FONTS
+   ================================================== */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@100;200;300;400;500;600;700;800&display=swap');
+
+/* ==================================================
+   ROOT VARIABLES
+   ================================================== */
+:root {
+  --gold-primary: #FFD700;
+  --gold-secondary: #FFA500;
+  --gold-dark: #B8860B;
+  --dark-primary: #1A1A1A;
+  --dark-secondary: #252525;
+  --dark-border: #333333;
+  --text-primary: #F5F5F5;
+  --text-secondary: #E0E0E0;
+  --shadow-gold: 0 4px 14px 0 rgba(255, 215, 0, 0.15);
+}
+
+/* ==================================================
+   BASE STYLES
+   ================================================== */
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background: var(--dark-primary);
+  color: var(--text-primary);
+  overflow-x: hidden;
+}
+
+code {
+  font-family: 'JetBrains Mono', source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+/* ==================================================
+   SELECTION STYLES
+   ================================================== */
+::selection {
+  background: rgba(255, 215, 0, 0.3);
+  color: var(--text-primary);
+}
+
+::-moz-selection {
+  background: rgba(255, 215, 0, 0.3);
+  color: var(--text-primary);
+}
+
+/* ==================================================
+   SCROLLBAR STYLES
+   ================================================== */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--dark-secondary);
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, var(--gold-primary), var(--gold-secondary));
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, var(--gold-secondary), var(--gold-primary));
+}
+
+/* ==================================================
+   CUSTOM ANIMATIONS
+   ================================================== */
+
+/* Gold shimmer effect */
+@keyframes shimmer {
+  0% {
+    background-position: -200px 0;
+  }
+  100% {
+    background-position: 200px 0;
+  }
+}
+
+.shimmer {
+  animation: shimmer 2s infinite linear;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 215, 0, 0.4),
+    transparent
+  );
+  background-size: 200px 100%;
+}
+
+/* Floating animation */
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-20px);
+  }
+}
+
+.floating {
+  animation: float 6s ease-in-out infinite;
+}
+
+/* Pulse glow effect */
+@keyframes pulseGlow {
+  0%, 100% {
+    box-shadow: 0 0 20px rgba(255, 215, 0, 0.4);
+  }
+  50% {
+    box-shadow: 0 0 40px rgba(255, 215, 0, 0.8);
+  }
+}
+
+.pulse-glow {
+  animation: pulseGlow 2s ease-in-out infinite;
+}
+
+/* Rotate animation */
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.rotate {
+  animation: rotate 10s linear infinite;
+}
+
+/* ==================================================
+   UTILITY CLASSES
+   ================================================== */
+
+/* Glass morphism effects */
+.glass {
+  background: rgba(26, 26, 26, 0.8);
+  backdrop-filter: blur(10px) saturate(180%);
+  border: 1px solid rgba(255, 215, 0, 0.1);
+}
+
+.glass-gold {
+  background: rgba(255, 215, 0, 0.1);
+  backdrop-filter: blur(10px) saturate(180%);
+  border: 1px solid rgba(255, 215, 0, 0.2);
+}
+
+/* Text effects */
+.text-glow {
+  text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+}
+
+.text-glow-strong {
+  text-shadow: 0 0 20px rgba(255, 215, 0, 0.8);
+}
+
+/* Gradient text */
+.text-gradient-gold {
+  background: linear-gradient(135deg, var(--gold-primary), var(--gold-secondary));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Hover effects */
+.hover-lift {
+  transition: all 0.3s ease;
+}
+
+.hover-lift:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-gold);
+}
+
+.hover-glow {
+  transition: all 0.3s ease;
+}
+
+.hover-glow:hover {
+  box-shadow: 0 0 30px rgba(255, 215, 0, 0.4);
+}
+
+/* Loading skeleton */
+.skeleton {
+  background: linear-gradient(
+    90deg,
+    rgba(37, 37, 37, 0.4) 0%,
+    rgba(255, 215, 0, 0.1) 50%,
+    rgba(37, 37, 37, 0.4) 100%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+}
+
+/* ==================================================
+   COMPONENT-SPECIFIC STYLES
+   ================================================== */
+
+/* Navigation */
+.nav-link {
+  position: relative;
+  transition: all 0.3s ease;
+}
+
+.nav-link::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--gold-primary), var(--gold-secondary));
+  transition: width 0.3s ease;
+}
+
+.nav-link:hover::after,
+.nav-link.active::after {
+  width: 100%;
+}
+
+/* Button animations */
+.btn-hover-effect {
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-hover-effect::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.2),
+    transparent
+  );
+  transition: left 0.5s ease;
+}
+
+.btn-hover-effect:hover::before {
+  left: 100%;
+}
+
+/* Card animations */
+.card-hover {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.card-hover:hover {
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: 0 20px 40px rgba(255, 215, 0, 0.2);
+}
+
+/* Form inputs */
+.input-focus {
+  position: relative;
+}
+
+.input-focus::before {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--gold-primary), var(--gold-secondary));
+  transition: width 0.3s ease;
+}
+
+.input-focus:focus-within::before {
+  width: 100%;
+}
+
+/* ==================================================
+   RESPONSIVE UTILITIES
+   ================================================== */
+
+/* Mobile optimizations */
+@media (max-width: 768px) {
+  .mobile-optimize {
+    font-size: 16px; /* Prevent zoom on iOS */
+  }
+  
+  .mobile-touch {
+    min-height: 44px; /* Minimum touch target */
+  }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  .gold-text {
+    color: #FFFF00 !important;
+  }
+  
+  .border-gold {
+    border-color: #FFFF00 !important;
+  }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* ==================================================
+   DARK MODE SUPPORT
+   ================================================== */
+
+.dark {
+  --bg-primary: #0f0f0f;
+  --bg-secondary: #1a1a1a;
+  --text-primary: #ffffff;
+  --text-secondary: #e5e5e5;
+}
+
+/* ==================================================
+   PRINT STYLES
+   ================================================== */
+
+@media print {
+  .no-print {
+    display: none !important;
+  }
+  
+  body {
+    background: white !important;
+    color: black !important;
+  }
+  
+  .gold-text {
+    color: #000 !important;
+  }
+}
+
+/* ==================================================
+   ACCESSIBILITY IMPROVEMENTS
+   ================================================== */
+
+/* Focus styles */
+.focus-visible:focus {
+  outline: 2px solid var(--gold-primary);
+  outline-offset: 2px;
+}
+
+/* Skip link */
+.skip-link {
+  position: absolute;
+  top: -40px;
+  left: 6px;
+  background: var(--gold-primary);
+  color: var(--dark-primary);
+  padding: 8px;
+  border-radius: 4px;
+  text-decoration: none;
+  z-index: 1000;
+}
+
+.skip-link:focus {
+  top: 6px;
+}
+
+/* Screen reader only */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* ==================================================
+   ERROR STATES
+   ================================================== */
+
+.error {
+  color: #ff6b6b;
+  border-color: #ff6b6b;
+}
+
+.error-glow {
+  box-shadow: 0 0 10px rgba(255, 107, 107, 0.3);
+}
+
+.success {
+  color: var(--gold-primary);
+  border-color: var(--gold-primary);
+}
+
+.success-glow {
+  box-shadow: 0 0 10px rgba(255, 215, 0, 0.3);
+}

@@ -1,0 +1,506 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ==================================================
+   GLOBAL STYLES & CUSTOM CSS VARIABLES
+   ================================================== */
+
+:root {
+  /* Club 90s Gold Palette */
+  --gold-50: #fefce8;
+  --gold-100: #fef9c3;
+  --gold-200: #fef08a;
+  --gold-300: #fde047;
+  --gold-400: #facc15;
+  --gold-500: #eab308;
+  --gold-600: #ca8a04;
+  --gold-700: #a16207;
+  --gold-800: #854d0e;
+  --gold-900: #713f12;
+
+  /* Dark Theme Palette */
+  --dark-50: #f9fafb;
+  --dark-100: #f3f4f6;
+  --dark-200: #e5e7eb;
+  --dark-300: #d1d5db;
+  --dark-400: #9ca3af;
+  --dark-500: #6b7280;
+  --dark-600: #4b5563;
+  --dark-700: #374151;
+  --dark-800: #1f2937;
+  --dark-900: #111827;
+  --dark-950: #0a0a0a;
+
+  /* Custom Properties */
+  --border-radius: 0.5rem;
+  --border-radius-lg: 1rem;
+  --box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
+  --box-shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+  
+  /* Animation Timings */
+  --animation-fast: 150ms;
+  --animation-normal: 300ms;
+  --animation-slow: 500ms;
+  
+  /* Z-Index Scale */
+  --z-dropdown: 1000;
+  --z-sticky: 1020;
+  --z-fixed: 1030;
+  --z-modal-backdrop: 1040;
+  --z-modal: 1050;
+  --z-popover: 1060;
+  --z-tooltip: 1070;
+  --z-toast: 1080;
+}
+
+/* ==================================================
+   BASE STYLES & RESETS
+   ================================================== */
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif;
+  line-height: 1.5;
+  -webkit-text-size-adjust: 100%;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: inherit;
+  background-color: var(--dark-950);
+  color: white;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* ==================================================
+   TYPOGRAPHY
+   ================================================== */
+
+.font-display {
+  font-family: 'Playfair Display', serif;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 600;
+  line-height: 1.2;
+  letter-spacing: -0.025em;
+}
+
+h1 { font-size: 2.25rem; }
+h2 { font-size: 1.875rem; }
+h3 { font-size: 1.5rem; }
+h4 { font-size: 1.25rem; }
+h5 { font-size: 1.125rem; }
+h6 { font-size: 1rem; }
+
+p {
+  line-height: 1.6;
+}
+
+/* ==================================================
+   ACCESSIBILITY & FOCUS STYLES
+   ================================================== */
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* Custom focus styles */
+.focus-ring {
+  @apply focus:outline-none focus:ring-2 focus:ring-gold-400 focus:ring-offset-2 focus:ring-offset-dark-900;
+}
+
+/* Enhanced focus visibility */
+*:focus-visible {
+  outline: 2px solid var(--gold-400);
+  outline-offset: 2px;
+}
+
+/* ==================================================
+   SCROLLBAR STYLING
+   ================================================== */
+
+/* Webkit browsers */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--dark-800);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--gold-600);
+  border-radius: 4px;
+  transition: background var(--animation-normal) ease;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--gold-500);
+}
+
+/* Firefox */
+html {
+  scrollbar-width: thin;
+  scrollbar-color: var(--gold-600) var(--dark-800);
+}
+
+/* ==================================================
+   SELECTION STYLES
+   ================================================== */
+
+::selection {
+  background-color: var(--gold-400);
+  color: var(--dark-950);
+}
+
+::-moz-selection {
+  background-color: var(--gold-400);
+  color: var(--dark-950);
+}
+
+/* ==================================================
+   FORM ELEMENTS
+   ================================================== */
+
+input, textarea, select {
+  font-family: inherit;
+  font-size: inherit;
+}
+
+/* Remove default input styles */
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="tel"],
+input[type="date"],
+input[type="number"],
+textarea,
+select {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+}
+
+/* Custom checkbox styling */
+input[type="checkbox"] {
+  appearance: none;
+  -webkit-appearance: none;
+  width: 1rem;
+  height: 1rem;
+  border: 2px solid var(--gold-400);
+  border-radius: 0.25rem;
+  background-color: transparent;
+  position: relative;
+  cursor: pointer;
+  transition: all var(--animation-normal) ease;
+}
+
+input[type="checkbox"]:checked {
+  background-color: var(--gold-400);
+  border-color: var(--gold-400);
+}
+
+input[type="checkbox"]:checked::after {
+  content: '✓';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: var(--dark-950);
+  font-size: 0.75rem;
+  font-weight: bold;
+}
+
+/* ==================================================
+   ANIMATION UTILITIES
+   ================================================== */
+
+.animate-fade-in {
+  animation: fadeIn var(--animation-slow) ease-out;
+}
+
+.animate-slide-up {
+  animation: slideUp var(--animation-slow) ease-out;
+}
+
+.animate-slide-down {
+  animation: slideDown var(--animation-slow) ease-out;
+}
+
+.animate-scale-in {
+  animation: scaleIn var(--animation-normal) ease-out;
+}
+
+.animate-pulse-gold {
+  animation: pulseGold 2s ease-in-out infinite;
+}
+
+.animate-shimmer {
+  animation: shimmer 2s ease-in-out infinite;
+}
+
+/* ==================================================
+   KEYFRAME ANIMATIONS
+   ================================================== */
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(2rem);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-2rem);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes pulseGold {
+  0%, 100% {
+    box-shadow: 0 0 0 0 rgba(212, 175, 55, 0.7);
+  }
+  50% {
+    box-shadow: 0 0 0 10px rgba(212, 175, 55, 0);
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -200px 0;
+  }
+  100% {
+    background-position: 200px 0;
+  }
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* ==================================================
+   UTILITY CLASSES
+   ================================================== */
+
+.text-balance {
+  text-wrap: balance;
+}
+
+.container-fluid {
+  width: 100%;
+  max-width: none;
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+.aspect-square {
+  aspect-ratio: 1 / 1;
+}
+
+.aspect-video {
+  aspect-ratio: 16 / 9;
+}
+
+/* Gold gradient text utility */
+.text-gradient-gold {
+  background: linear-gradient(135deg, var(--gold-400) 0%, var(--gold-500) 50%, var(--gold-600) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-size: 200% 200%;
+}
+
+/* Dark gradient background utility */
+.bg-dark-gradient {
+  background: linear-gradient(135deg, var(--dark-950) 0%, var(--dark-900) 50%, var(--dark-800) 100%);
+}
+
+/* Gold gradient background utility */
+.bg-gold-gradient {
+  background: linear-gradient(135deg, var(--gold-400) 0%, var(--gold-500) 50%, var(--gold-600) 100%);
+}
+
+/* Glass morphism effect */
+.glass {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.glass-dark {
+  background: rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Shadow utilities */
+.shadow-gold {
+  box-shadow: 0 4px 6px -1px rgba(212, 175, 55, 0.1), 0 2px 4px -1px rgba(212, 175, 55, 0.06);
+}
+
+.shadow-gold-lg {
+  box-shadow: 0 10px 15px -3px rgba(212, 175, 55, 0.1), 0 4px 6px -2px rgba(212, 175, 55, 0.05);
+}
+
+/* ==================================================
+   RESPONSIVE UTILITIES
+   ================================================== */
+
+@media (max-width: 640px) {
+  .container {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+  
+  h1 { font-size: 1.875rem; }
+  h2 { font-size: 1.5rem; }
+  h3 { font-size: 1.25rem; }
+}
+
+/* ==================================================
+   PRINT STYLES
+   ================================================== */
+
+@media print {
+  * {
+    background: transparent !important;
+    color: black !important;
+    box-shadow: none !important;
+    text-shadow: none !important;
+  }
+  
+  .no-print {
+    display: none !important;
+  }
+}
+
+/* ==================================================
+   REDUCED MOTION SUPPORT
+   ================================================== */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ==================================================
+   HIGH CONTRAST MODE SUPPORT
+   ================================================== */
+
+@media (prefers-contrast: high) {
+  :root {
+    --gold-400: #ffff00;
+    --gold-500: #ffff00;
+    --gold-600: #ffff00;
+  }
+}
+
+/* ==================================================
+   DARK MODE SUPPORT (if needed for future themes)
+   ================================================== */
+
+@media (prefers-color-scheme: light) {
+  /* Light theme overrides would go here if needed */
+}
+
+/* ==================================================
+   LOADING STATES
+   ================================================== */
+
+.loading {
+  position: relative;
+  overflow: hidden;
+}
+
+.loading::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.1),
+    transparent
+  );
+  animation: shimmer 1.5s ease-in-out infinite;
+}
+
+/* ==================================================
+   ERROR STATES
+   ================================================== */
+
+.error-state {
+  color: #ef4444;
+  border-color: #ef4444;
+}
+
+.success-state {
+  color: #10b981;
+  border-color: #10b981;
+}
+
+.warning-state {
+  color: #f59e0b;
+  border-color: #f59e0b;
+}
